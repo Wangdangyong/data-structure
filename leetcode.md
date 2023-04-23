@@ -240,5 +240,36 @@ public class Main5 {
 
     }
 }
-```
+6.整型数组nums,在数组中找出由3个数字组成的最大成绩，并输出成绩
+
+package com.wdy;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ *
+ * 整型数组nums,在数组中找出由3个数字组成的最大成绩，并输出成绩
+ */
+public class Main6 {
+    public static void main(String[] args) {
+        System.out.println("输入几个数，用号隔开");
+        Scanner scanner=new Scanner(System.in);
+        String str=scanner.next().toString();
+        String [] arr= str.split(",");
+        int [] br=new int[arr.length];
+        for (int i=0;i<arr.length;i++){
+            br[i]=Integer.parseInt(arr[i]);
+        }
+        System.out.println(sort(br));
+    }
+    public static int sort(int [] nums){
+        Arrays.sort(nums);
+        int n=nums.length;
+
+        return Math.max(nums[0]*nums[1]*nums[n-1],nums[n-1]*nums[n-2]*nums[n-3]);
+
+    }
+}
+
 

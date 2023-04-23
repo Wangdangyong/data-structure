@@ -12,6 +12,9 @@ import java.util.Scanner;
 
  * .统计n以内的素数的个数-暴力拆解
    */
+   
+   
+   
    public class Main {
    public static void main(String[] args) {
        Scanner sc=new Scanner(System.in);
@@ -54,6 +57,10 @@ import java.util.Scanner;
 
  * 埃筛法
    */
+   
+   
+   
+   
    public class Main1 {
    public static void main(String[] args) {
        Scanner sc=new Scanner(System.in);
@@ -80,6 +87,8 @@ import java.util.Scanner;
 
    }
    }
+   
+   
 
  2.一个有序数组nums,原地删除重复的元素，使每个元素只出现一次，返回删除后数组的新长度(不能是用额外的数组空间，必须在原地修改数组并在使用O（1）额外空间下完成)
 
@@ -92,6 +101,11 @@ import java.util.Scanner;
  * 一个有序数组nums,原地删除重复的元素，使每个元素只出现一次，返回删除后数组的新长度
  * 不能是用额外的数组空间，必须在原地修改数组并在使用O（1）额外空间下完成
    */
+   
+   
+   
+   
+   
    public class Main2 {
    public static void main(String[] args) {
        System.out.println(removeDup(new int[]{0,1,2,2,3,3,4}));
@@ -116,6 +130,9 @@ import java.util.Scanner;
 
 }
 
+
+
+
 3.给定一个整数组nums,请编写一个能返回数组中心下标的方法
 中心下标：气左侧所有元素和等于右侧所有元素和，如果不存在中心下标，返回-1.
 
@@ -128,6 +145,9 @@ import java.util.Scanner;
 
 
 Array.Stream()返回的是一个元素序列，且支持顺序和并行的聚合操作。其实我们可以把它理解为包装类，其实和对于Int来说，元素序列类型为OptionalInt，包装类为Integer，它们在各自的领域各司其职，只不过Int类型和Integer类型可以自动转化
+
+
+
 
 
 
@@ -160,12 +180,18 @@ public class Main3 {
 
 }
 
+
+
 4.在不使用sqrt的情况下，求x平方根的整数部分。
 
   /**
 
  * 二分法
    */
+   
+   
+   
+   
    public class Main4 {
    public static void main(String[] args) {
        System.out.println(sqr(16));
@@ -214,6 +240,7 @@ public class Main5 {
 
 
     }
+    
 
     public static ListNode iterate(ListNode head){
         ListNode pre=null,next;//保持前后指针使用
@@ -240,7 +267,9 @@ public class Main5 {
 
     }
 }
-6.整型数组nums,在数组中找出由3个数字组成的最大成绩，并输出成绩
+
+
+6.整型数组nums,在数组中找出由3个数字组成的最大乘积，并输出乘积
 
 package com.wdy;
 
@@ -249,8 +278,11 @@ import java.util.Scanner;
 
 /**
  *
- * 整型数组nums,在数组中找出由3个数字组成的最大成绩，并输出成绩
+ * 整型数组nums,在数组中找出由3个数字组成的最大乘积，并输出乘积
  */
+ 
+ 
+ 
 public class Main6 {
     public static void main(String[] args) {
         System.out.println("输入几个数，用号隔开");
@@ -270,6 +302,70 @@ public class Main6 {
         return Math.max(nums[0]*nums[1]*nums[n-1],nums[n-1]*nums[n-2]*nums[n-3]);
 
     }
+}
+
+
+
+
+package com.wdy;
+
+import java.util.Scanner;
+
+/**
+ * 二
+ * Integer.MAX_VALUE表示int数据类型的最大取值数：2 147 483 647
+ * Integer.MIN_VALUE表示int数据类型的最小取值数：-2 147 483 648
+ */
+public class Main7 {
+
+    public static void main(String[] args) {
+        System.out.println("输入几个数,用号隔开");
+        Scanner scanner=new Scanner(System.in);
+        String str=scanner.next().toString();
+        String [] arr= str.split(",");
+        int [] br=new int[arr.length];
+        for (int i=0;i<arr.length;i++){
+            br[i]=Integer.parseInt(arr[i]);
+        }
+        System.out.println(getMaxMin(br));
+
+
+    }
+    public static int getMaxMin(int [] nums){
+        int min1=Integer.MAX_VALUE;
+        int min2=Integer.MAX_VALUE;
+        int max1=Integer.MIN_VALUE;
+        int max2=Integer.MIN_VALUE;
+        int max3=Integer.MIN_VALUE;
+
+        for ( int x:nums){
+            if (x<min1){
+                min2=min1;
+                min1=x;
+            }else
+            if (x<min2){
+                min2=x;
+            }
+            if(x>max1){
+                max3=max2;
+                max2=max1;
+                max1=x;
+
+            }else if (x>max2){
+                max3=max2;
+                max2=x;
+
+            }else if (x>max3){
+                max3=x;
+            }
+
+
+        }
+
+        return Math.max(min1*min2*max1,max1*max2*max3);
+
+    }
+
 }
 
 

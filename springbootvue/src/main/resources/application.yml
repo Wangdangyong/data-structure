@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+# DataSource ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+spring:
+  security:
+    user:
+      name: user
+      password: 111111
+  application:
+    name: springboot-vue
+  boot:
+    admin:
+      client:
+        url: http://localhost:8090
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot_graduate?characterEncoding=utf-8
+    username: root
+    password: 123456
+

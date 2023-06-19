@@ -782,6 +782,74 @@ public class Main2 {
     }
 }
 
+16.给你一个字符串 s，找到 s 中最长的回文子串。
+
+如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
+
+ 
+
+示例 1：
+
+输入：s = "babad"
+输出："bab"
+解释："aba" 同样是符合题意的答案。
+
+示例 2：
+
+输入：s = "cbbd"
+输出："bb"
+
+ 
+
+提示：
+
+    1 <= s.length <= 1000
+    s 仅由数字和英文字母组成
+
+
+代码：
+
+public class LongestPalindrome {
+    public static String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) {
+            return "";
+        }
+
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+
+        return s.substring(start, end + 1);
+    }
+
+    private static int expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+
+        return right - left - 1;
+    }
+
+    public static void main(String[] args) {
+        String s = "babad";
+        String longestPalindrome = longestPalindrome(s);
+        System.out.println(longestPalindrome);
+    }
+}
+
+在这个解决方案中，我们使用了中心扩展法。我们遍历字符串中的每个字符，并以该字符为中心向两边扩展，检查是否有回文子串。我们需要考虑两种情况：回文串长度为奇数和回文串长度为偶数。最终，我们更新最长回文子串的起始位置和结束位置，并返回最长回文子串。
+
 
 
 

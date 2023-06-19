@@ -808,7 +808,14 @@ public class Main2 {
 
 
 代码：
-
+代码中的 longestPalindrome 方法接收一个字符串 s 作为输入，并返回最长回文子串。如果输入字符串为空或长度小于1，直接返回空字符串。
+在方法的开头，定义了两个变量 start 和 end，用于记录当前找到的最长回文子串的起始和结束索引。
+接下来，通过一个循环遍历字符串 s 的每个字符，以每个字符为中心，向两边扩展判断是否是回文子串。其中，调用了 expandAroundCenter 方法来实现扩展判断。
+expandAroundCenter 方法接收三个参数：字符串 s、左边界 left 和右边界 right。该方法使用两个指针分别指向左边界和右边界，然后向两边扩展判断字符是否相等，直到左边界小于0或右边界大于等于字符串长度，或者左右指针所指字符不相等为止。最后返回回文子串的长度。
+在每次循环中，使用 expandAroundCenter 方法分别计算以当前字符为中心的奇数长度回文子串的长度（len1）和偶数长度回文子串的长度（len2），并取两者中较大的一个作为当前回文子串的长度（len）。
+如果当前回文子串的长度大于之前记录的最长回文子串的长度（即 len > end - start），更新 start 和 end 的值，使其表示当前找到的最长回文子串的起始和结束索引。
+最后，返回 s 中从 start 到 end 的子串，即最长回文子串。
+在 main 方法中，定义了一个字符串 s，并调用 longestPalindrome 方法获取最长回文子串，然后将其打印输出。
 public class LongestPalindrome {
     public static String longestPalindrome(String s) {
         if (s == null || s.length() < 1) {

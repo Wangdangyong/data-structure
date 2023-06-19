@@ -857,6 +857,95 @@ public class LongestPalindrome {
 
 在这个解决方案中，我们使用了中心扩展法。我们遍历字符串中的每个字符，并以该字符为中心向两边扩展，检查是否有回文子串。我们需要考虑两种情况：回文串长度为奇数和回文串长度为偶数。最终，我们更新最长回文子串的起始位置和结束位置，并返回最长回文子串。
 
+17.将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
+
+比如输入字符串为 "PAYPALISHIRING" 行数为 3 时，排列如下：
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+
+之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如："PAHNAPLSIIGYIR"。
+
+请你实现这个将字符串进行指定行数变换的函数：
+
+string convert(string s, int numRows);
+
+ 
+
+示例 1：
+
+输入：s = "PAYPALISHIRING", numRows = 3
+输出："PAHNAPLSIIGYIR"
+
+示例 2：
+
+输入：s = "PAYPALISHIRING", numRows = 4
+输出："PINALSIGYAHRPI"
+解释：
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+
+示例 3：
+
+输入：s = "A", numRows = 1
+输出："A"
+
+ 
+
+提示：
+
+    1 <= s.length <= 1000
+    s 由英文字母（小写和大写）、',' 和 '.' 组成
+    1 <= numRows <= 1000
+    
+ 代码：public class ZigZagConversion {
+    public static String convert(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
+
+        StringBuilder[] rows = new StringBuilder[numRows];
+        for (int i = 0; i < numRows; i++) {
+            rows[i] = new StringBuilder();
+        }
+
+        int currentRow = 0;
+        boolean goingDown = false;
+
+        for (char c : s.toCharArray()) {
+            rows[currentRow].append(c);
+            if (currentRow == 0 || currentRow == numRows - 1) {
+                goingDown = !goingDown;
+            }
+            currentRow += goingDown ? 1 : -1;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (StringBuilder row : rows) {
+            result.append(row);
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String s = "PAYPALISHIRING";
+        int numRows = 3;
+        String converted = convert(s, numRows);
+        System.out.println(converted);
+    }
+}
+
+解释：
+这段代码首先检查特殊情况，如果 numRows 为 1，则直接返回原始字符串 s。
+然后创建一个 StringBuilder 数组 rows，数组的长度为 numRows，每个元素都是一个 StringBuilder 对象，用于存储每一行的字符。
+接下来，使用 currentRow 变量来追踪当前行数，并使用 goingDown 变量来判断当前字符是向上还是向下排列。循环遍历字符串 s 中的每个字符，将字符添加到对应的行中，并根据当前行的位置更新 currentRow 和 goingDown 变量。
+最后，将每一行的字符连接起来，并返回结果字符串。
+在主函数中，我们提供了一个示例输入，并打印出转换后的结果。
+运行以上代码将输出："PAHNAPLSIIGYIR"，与示例 1 中的预期输出相符。
 
 
 

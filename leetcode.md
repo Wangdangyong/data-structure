@@ -1085,6 +1085,93 @@ public class RemoveElement {
         System.out.println();
     }
 }
+20.
+给你一个链表的头节点 head 和一个特定值 x ，请你对链表进行分隔，使得所有 小于 x 的节点都出现在 大于或等于 x 的节点之前。
+
+你应当 保留 两个分区中每个节点的初始相对位置。
+
+ 
+
+示例 1：
+
+输入：head = [1,4,3,2,5,2], x = 3
+输出：[1,2,2,4,3,5]
+
+示例 2：
+
+输入：head = [2,1], x = 2
+输出：[1,2]
+代码：
+public class PartitionList {
+    public static ListNode partition(ListNode head, int x) {
+        ListNode smallerHead = new ListNode(0); // 存储小于 x 的节点的头节点
+        ListNode smallerTail = smallerHead; // 存储小于 x 的节点的尾节点
+        ListNode greaterOrEqualHead = new ListNode(0); // 存储大于等于 x 的节点的头节点
+        ListNode greaterOrEqualTail = greaterOrEqualHead; // 存储大于等于 x 的节点的尾节点
+
+        while (head != null) {
+            if (head.val < x) {
+                smallerTail.next = head; // 将当前节点连接到小于 x 的链表上
+                smallerTail = smallerTail.next; // 更新小于 x 的链表的尾节点
+            } else {
+                greaterOrEqualTail.next = head; // 将当前节点连接到大于等于 x 的链表上
+                greaterOrEqualTail = greaterOrEqualTail.next; // 更新大于等于 x 的链表的尾节点
+            }
+            head = head.next; // 遍历下一个节点
+        }
+
+        greaterOrEqualTail.next = null; // 断开大于等于 x 的链表的尾节点与下一个节点的连接
+        smallerTail.next = greaterOrEqualHead.next; // 将大于等于 x 的链表连接到小于 x 的链表的尾部
+
+        return smallerHead.next; // 返回小于 x 的链表的头节点
+    }
+
+    public static void main(String[] args) {
+        // 构建示例链表 1->4->3->2->5->2
+        ListNode head1 = new ListNode(1);
+        head1.next = new ListNode(4);
+        head1.next.next = new ListNode(3);
+        head1.next.next.next = new ListNode(2);
+        head1.next.next.next.next = new ListNode(5);
+        head1.next.next.next.next.next = new ListNode(2);
+
+        int x1 = 3;
+        ListNode result1 = partition(head1, x1);
+        System.out.print("分隔后的链表：");
+        printList(result1); // 输出：1->2->2->4->3->5
+        System.out.println();
+
+        // 构建示例链表 2->1
+        ListNode head2 = new ListNode(2);
+        head2.next = new ListNode(1);
+
+        int x2 = 2;
+        ListNode result2 = partition(head2, x2);
+        System.out.print("分隔后的链表：");
+        printList(result2); // 输出：1->2
+        System.out.println();
+    }
+
+    // 辅助方法：打印链表
+    private static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + "->");
+            current = current.next;
+        }
+        System.out.print("null");
+    }
+
+    // 链表节点定义
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+}
 
 
 
